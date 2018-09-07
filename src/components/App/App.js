@@ -18,6 +18,7 @@ class App extends Component {
             <h4><i>Don't forget it!</i></h4>
           </header>
           <br />
+          {/* routes to each of the views */}
           <Route path="/" component={FeelingView} />
           <Route path="/understanding" component={UnderstandingView} />
           <Route path="/support" component={SupportView} />

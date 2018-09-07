@@ -7,6 +7,7 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 
+// Reducer for storing feedback information
 const feedback = (state = [], action) => {
     return state;
 } 
@@ -18,5 +19,5 @@ const storeInstance = createStore(
     applyMiddleware(logger),
 )
 
-ReactDOM.render(<Provider stoer={storeInstance}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
