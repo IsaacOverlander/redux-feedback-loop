@@ -19,7 +19,7 @@ class App extends Component {
           </header>
           <br />
           {/* routes to each of the views */}
-          <Route path="/" component={FeelingView} />
+          <Route exact path="/" component={FeelingView} />
           <Route path="/understanding" component={UnderstandingView} />
           <Route path="/support" component={SupportView} />
           <Route path="/comments" component={CommentsView} />

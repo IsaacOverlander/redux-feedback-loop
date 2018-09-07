@@ -7,8 +7,18 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 
+const blankFeedback = {
+    feeling: 0,
+    understanding: 0,
+    support: 0,
+    comments: '',
+}
+
 // Reducer for storing feedback information
-const feedback = (state = [], action) => {
+const feedback = (state = blankFeedback, action) => {
+    if (action.type === 'SET_FEELING') {
+        return {...state, feeling: action.payload,}
+    }
     return state;
 } 
 
