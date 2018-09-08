@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
 })
 // GET route
 router.get('/', (req, res) => {
-    query = `SELECT * FROM "feedback;`;
+    query = `SELECT * FROM "feedback";`;
     pool.query(query).then((result) => {
         res.send(result.rows);
     }).catch((error) => {

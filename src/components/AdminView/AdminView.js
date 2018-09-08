@@ -1,7 +1,26 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
+import FeedbackItem from '../FeedbackItem/FeedbackItem.js'
 
 class AdminView extends Component {
+
+    componentDidMount = () => {
+        this.getFeedback();
+    }
+
+    getFeedback = () => {
+        axios({
+          method: 'GET',
+          url: '/feedback'  
+        }).then((response) => {
+            const action = {type: 'SET_ALLFEEDBACK', payload: response.data};
+            this.props.dispatch(action);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     render () {
         return (
             <div>
@@ -17,7 +36,9 @@ class AdminView extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {this.props.reduxState.allFeedback.map((feedback, i) => {
+                            return (<FeedbackItem key={i} feedback={feedback}/>);
+                        })}
                     </tbody>
                 </table>
             </div>
