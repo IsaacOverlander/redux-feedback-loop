@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 class CommentsView extends Component {
 
@@ -19,13 +20,24 @@ class CommentsView extends Component {
         console.log(this.state.comment);
     }
 
+    // Function to set the comment in redux and then send the information 
+    // to the database
     sendComment = (event) => {
         event.preventDefault();
         const action = {type: 'SET_COMMENT', payload: this.state.comment}
         this.props.dispatch(action);
-        
-        this.props.history.push('/success')
-    }
+        axios({
+            method: 'POST',
+            url: '/feedback',
+            data: this.props.reduxState.feedback
+        }).then((response) => {
+            this.props.history.push('/success');
+            alert('Feedback was sent!');
+        }).catch((error) => {
+            console.log('Error', error);
+            alert('There was an error sending your feedback');
+        });// End axios request
+    }//End sendComment
 
     render () {
         return (
@@ -43,7 +55,7 @@ class CommentsView extends Component {
     };
 };
 
-const mapReduxStateToProps = (reduxState) ({
+const mapReduxStateToProps = (reduxState) => ({
     reduxState,
 })
 export default connect(mapReduxStateToProps)(CommentsView);
