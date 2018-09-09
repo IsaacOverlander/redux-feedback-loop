@@ -1,52 +1,56 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 class CommentsView extends Component {
 
     constructor() {
         super();
         this.state = {
-            comment: '',
+            comments: '',
         }
     }
-
     // Function for setting state when there is a change
     // in the form
     handleCommentChange = (event) => {
         this.setState({
-            comment: event.target.value,
+            comments: event.target.value,
         })
-        console.log(this.state.comment);
     }
 
     // Function to set the comment in redux and then send the information 
     // to the database
     sendComment = (event) => {
         event.preventDefault();
-        const action = {type: 'SET_COMMENT', payload: this.state.comment}
-        this.props.dispatch(action);
-        axios({
-            method: 'POST',
-            url: '/feedback',
-            data: this.props.reduxState.feedback
-        }).then((response) => {
-            this.props.history.push('/success');
-            alert('Feedback was sent!');
+        swal('sending your feedback...').then(() => {
+            const action = { type: 'SET_COMMENT', payload: this.state.comments }
+            this.props.dispatch(action);
+        }).then(() => {
+            axios({
+                method: 'POST',
+                url: '/feedback',
+                data: this.props.reduxState.feedback
+            }).then((response) => {
+                swal('Your feedback was sent!');
+            }).catch((error) => {
+                console.log(error);
+                swal('There was a problem sending your feedback.');
+            });// End axios request
         }).catch((error) => {
-            console.log('Error', error);
-            alert('There was an error sending your feedback');
-        });// End axios request
-    }//End sendComment
+            console.log(error);
+            swal('there was an error sending your feedbacl')
+        })
+    }// End sendCommentToRedux
 
-    render () {
+    render() {
         return (
             <div>
                 <h3>Page 4 of 4</h3>
                 <br />
                 <form onSubmit={this.sendComment}>
                     <label>Would you like to leave a comment?</label>
-                    <input type="text" onChange={this.handleCommentChange}/>
+                    <input type="text" onChange={this.handleCommentChange} />
                     <br />
                     <button type="submit">Send Feedback</button>
                 </form>

@@ -12,7 +12,7 @@ const blankFeedback = {
     feeling: 0,
     understanding: 0,
     support: 0,
-    comment: '',
+    comments: '',
 }
 
 // Reducer for storing feedback information
@@ -31,7 +31,7 @@ const feedback = (state = blankFeedback, action) => {
     }
     // Sets commnt
     else if (action.type === 'SET_COMMENT') {
-        return { ...state, comment: action.payload }
+        return { ...state, comments: action.payload };
     }
     // returns current state if no actions match
     return state;

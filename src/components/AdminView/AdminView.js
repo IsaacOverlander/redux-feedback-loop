@@ -36,8 +36,8 @@ class AdminView extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.reduxState.allFeedback.map((feedback, i) => {
-                            return (<FeedbackItem key={i} feedback={feedback}/>);
+                        {this.props.reduxState.allFeedback.map((feedback) => {
+                            return (<FeedbackItem key={feedback.id} feedback={feedback} getFeedback={this.getFeedback}/>);
                         })}
                     </tbody>
                 </table>
