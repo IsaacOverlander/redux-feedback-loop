@@ -1,7 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
-import FeedbackItem from '../FeedbackItem/FeedbackItem.js'
+import FeedbackItem from '../FeedbackItem/FeedbackItem.js';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 class AdminView extends Component {
 
@@ -11,36 +17,38 @@ class AdminView extends Component {
 
     getFeedback = () => {
         axios({
-          method: 'GET',
-          url: '/feedback'  
+            method: 'GET',
+            url: '/feedback'
         }).then((response) => {
-            const action = {type: 'SET_ALLFEEDBACK', payload: response.data};
+            const action = { type: 'SET_ALLFEEDBACK', payload: response.data };
             this.props.dispatch(action);
         }).catch((error) => {
             console.log(error);
         })
     }
 
-    render () {
+    render() {
         return (
             <div>
                 <h2>Feedback Results</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Feeling</td>
-                            <td>Understanding</td>
-                            <td>Support</td>
-                            <td>Comments</td>
-                            <td>Delete</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.reduxState.allFeedback.map((feedback) => {
-                            return (<FeedbackItem key={feedback.id} feedback={feedback} getFeedback={this.getFeedback}/>);
-                        })}
-                    </tbody>
-                </table>
+                <Paper>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Feeling</TableCell>
+                                <TableCell>Understanding</TableCell>
+                                <TableCell>Support</TableCell>
+                                <TableCell>Comments</TableCell>
+                                <TableCell>Delete</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.props.reduxState.allFeedback.map((feedback) => {
+                                return (<FeedbackItem key={feedback.id} feedback={feedback} getFeedback={this.getFeedback} />);
+                            })}
+                        </TableBody>
+                    </Table>
+                </Paper>
             </div>
         );
     };

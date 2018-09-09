@@ -1,5 +1,10 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 class UnderstandingView extends Component {
 
@@ -21,21 +26,27 @@ class UnderstandingView extends Component {
 
     sendUnderstanding = (event) => {
         event.preventDefault();
-        const action = {type: 'SET_UNDERSTANDING', payload: this.state.understanding}
+        const action = { type: 'SET_UNDERSTANDING', payload: this.state.understanding }
         this.props.dispatch(action);
         this.props.history.push('/support')
     }
-    render () {
+    render() {
         return (
             <div>
-                <h3>Page 2 of 4</h3>
-                <br />
-                <form onSubmit={this.sendUnderstanding}>
-                    <label>How well do you understand today's material?</label>
-                    <input type="number" onChange={this.handleUnderstandingChange} />
-                    <br />
-                    <button type="submit">Next</button>
-                </form>
+                <h2>Page 2 of 4</h2>
+                <Card className="card">
+                    <CardContent>
+                        <Typography color="textSecondary">
+                            How well do you understand today's material?
+                        </Typography>
+                        <Typography component="div">
+                            <Input type="number" value={this.state.understanding} onChange={this.handleUnderstandingChange}></Input>
+                            <br />
+                            <Button variant="contained" color="primary" onClick={this.sendUnderstanding}>Next</Button>
+                        </Typography>
+                    </CardContent>
+                </Card>
+                
             </div>
         );
     };

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 
 class FeedbackItem extends Component {
 
@@ -33,13 +35,13 @@ class FeedbackItem extends Component {
 
     render() {
         return (
-            <tr>
-                <td>{this.props.feedback.feeling}</td>
-                <td>{this.props.feedback.understanding}</td>
-                <td>{this.props.feedback.support}</td>
-                <td>{this.props.feedback.comments}</td>
-                <td><button onClick={this.deletefeedback}>Delete</button></td>
-            </tr>
+            <TableRow>
+                <TableCell>{this.props.feedback.feeling}</TableCell>
+                <TableCell>{this.props.feedback.understanding}</TableCell>
+                <TableCell>{this.props.feedback.support}</TableCell>
+                <TableCell>{this.props.feedback.comments}</TableCell>
+                <TableCell><button onClick={this.deletefeedback}>Delete</button></TableCell>
+            </TableRow>
         )
     }
 }

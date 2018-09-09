@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 class SupportView extends Component {
 
@@ -29,14 +34,19 @@ class SupportView extends Component {
     render () {
         return (
             <div>
-                <h3>Page 3 of 4</h3>
-                <br />
-                <form onSubmit={this.sendSupport}>
-                    <label>How well are you being supported?</label>
-                    <input type="number" onChange={this.handleSupportChange}/>
-                    <br />
-                    <button type="submit" >Next</button>
-                </form>
+                <h2>Page 3 of 4</h2>
+                <Card className="card">
+                    <CardContent>
+                        <Typography color="textSecondary">
+                            How well are you being supported?
+                        </Typography>
+                        <Typography component="div">
+                            <Input type="number" value={this.state.support} onChange={this.handleSupportChange}></Input>
+                            <br />
+                            <Button variant="contained" color="primary" onClick={this.sendSupport}>Next</Button>
+                        </Typography>
+                    </CardContent>
+                </Card>
             </div>
         );
     };
