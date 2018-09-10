@@ -33,6 +33,17 @@ router.delete('/:id', (req, res) => {
         console.log(error);
         res.sendStatus(500);
     })
-})
+});;// end DELETE
+
+// PUT route
+router.put('/:id', (req, res) => {
+    const query = `UPDATE "feedback" SET "flagged" = 'true' WHERE "id" = $1;`;
+    pool.query(query, [req.params.id]).then((result) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        res.sendStatus(500);
+        console.log(error);
+    });
+});// End PUT
 
 module.exports = router;

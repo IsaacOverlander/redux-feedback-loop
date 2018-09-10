@@ -40,6 +40,7 @@ class AdminView extends Component {
                                 <TableCell>Support</TableCell>
                                 <TableCell>Comments</TableCell>
                                 <TableCell>Delete</TableCell>
+                                <TableCell>Flag for Further Review</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

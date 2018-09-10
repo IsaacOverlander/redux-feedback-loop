@@ -22,3 +22,11 @@
   margin-right: auto;
   width: 40%;
 }
+
+.true {
+  background-color: red;
+}
+
+.false {
+  background-color: white;
+}

@@ -13,6 +13,7 @@ const blankFeedback = {
     understanding: 0,
     support: 0,
     comments: '',
+    flagged: false,
 }
 
 // Reducer for storing feedback information
@@ -32,6 +33,10 @@ const feedback = (state = blankFeedback, action) => {
     // Sets commnt
     else if (action.type === 'SET_COMMENT') {
         return { ...state, comments: action.payload };
+    }
+    //Toggles flagged
+    else if (action.type === 'MARK_FLAGGED') {
+        return { ...state, flagged: true}
     }
     // returns current state if no actions match
     return state;
